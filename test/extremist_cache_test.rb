@@ -29,9 +29,10 @@ class HashingTest < Test::Unit::TestCase
   end
   
   def test_hashing_yields_segmented_md5
-    hash = @h.b("123")
-    assert_match /^extremist\-cache\/([a-z\d]{2})\/([a-z\d]{2})\/([a-z\d]{2})/, hash,
-      "Should be a segmented path"
+    [1, [1,2,3], {"x" => 'y'}, Object.new].each do | value |
+      assert_match /^extremist\-cache\/([a-z\d]{2})\/([a-z\d]{2})\/([a-z\d]{2})/, @h.b(value),
+        "Should be a segmented path"
+    end
   end
   
   def test_hashing_yields_same_hash_for_different_hashes

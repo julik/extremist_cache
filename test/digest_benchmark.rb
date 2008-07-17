@@ -5,7 +5,11 @@ lets = ("a".."z").to_a
 
 require 'benchmark'
 
-[Digest::MD5, OpenSSL::Digest::MD5,  OpenSSL::Digest::MD4, OpenSSL::Digest::SHA1].each do | d |
+module Noop
+  def self.hexdigest(of); of; end
+end
+
+[Noop, Digest::MD5, OpenSSL::Digest::MD5,  OpenSSL::Digest::MD4, OpenSSL::Digest::SHA1].each do | d |
   
   puts "\n\n #{d} with value digest"
   Benchmark.bm do | x|

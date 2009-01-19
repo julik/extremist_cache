@@ -7,6 +7,7 @@ Hoe::RUBY_FLAGS.replace ENV['RUBY_FLAGS'] || "-I#{%w(lib ext bin test).join(File
 
 Hoe.new('extremist_cache', ExtremistCache::VERSION) do |p|
   p.developer('Julik', 'me@julik.nl')
+  p.description = "Object-keyed caches for anything"
   p.extra_deps << 'rails'
   p.rubyforge_name = 'extremist_cache'
 end

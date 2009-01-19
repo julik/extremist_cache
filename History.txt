@@ -1,3 +1,7 @@
+=== 0.0.2 / 2009-01-19
+
+* Fix botched builds
+
 === 0.0.1 / 2009-01-19
 
 * Gemification

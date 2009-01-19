@@ -1,7 +1,7 @@
 require 'openssl'
 module ExtremistCache
   DIGEST = OpenSSL::Digest::MD4
-  VERSION = '0.0.1'
+  VERSION = '0.0.2'
   
   # To be called from a plugin init.rb 
   def self.bootstrap!

@@ -5,12 +5,10 @@ require './lib/extremist_cache'
 Hoe::RUBY_FLAGS.replace ENV['RUBY_FLAGS'] || "-I#{%w(lib ext bin test).join(File::PATH_SEPARATOR)}" +
   (Hoe::RUBY_DEBUG ? " #{RUBY_DEBUG}" : '')
 
-Hoe.new('timecode', ExtremistCache::VERSION) do |p|
+Hoe.new('extremist_cache', ExtremistCache::VERSION) do |p|
   p.developer('Julik', 'me@julik.nl')
-  p.extra_deps.reject! {|e| e[0] == 'hoe' }
-  p.extra_deps << 'test-spec'
-  p.rubyforge_name = 'guerilla-di'
-  p.remote_rdoc_dir = 'timecode'
+  p.extra_deps << 'rails'
+  p.rubyforge_name = 'extremist_cache'
 end
 
 begin

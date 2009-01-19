@@ -84,6 +84,11 @@ class BogusController < ActionController::Base
   def rescue_action(e); raise e; end
   def perform_expensive_computation(flag); return "wroom #{flag}"; end
   def signal_return_value(retval); end
+  
+  def action_that_renders_with_cache
+    t = '<% erb_cache_based_on(params[:id]) do %> Foo<%= params[:id] %> <%= Time.now.usec %> <% end %>'
+    render :inline => t
+  end
 end
 
 class ValueReturnTest < Test::Unit::TestCase
@@ -113,4 +118,11 @@ class ValueReturnTest < Test::Unit::TestCase
     end
   end
   
+  def test_cache_through_helper
+    get :action_that_renders_with_cache, :id => "Poeing"
+    first_body = @response.body.dup
+    
+    10.times { get :action_that_renders_with_cache, :id => "Poeing" }
+    assert_equal first_body, @response.body
+  end
 end

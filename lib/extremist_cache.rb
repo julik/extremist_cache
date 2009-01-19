@@ -1,7 +1,7 @@
 require 'openssl'
 module ExtremistCache
   DIGEST = OpenSSL::Digest::MD4
-  VERSION = '0.0.2'
+  VERSION = '0.0.3'
   
   # To be called from a plugin init.rb 
   def self.bootstrap!
@@ -25,7 +25,12 @@ module ExtremistCache
   end
   
   def erb_cache_based_on(*whatever, &block)
-    @controller.cache_erb_fragment(block, lazy_cache_key_for(*whatever))
+    begin
+      name = {:__extremist => lazy_cache_key_for(whatever)}
+      @controller.fragment_for(output_buffer, name, nil, &block)
+    rescue NoMethodError
+      @controller.cache_erb_fragment(block, lazy_cache_key_for(*whatever))
+    end
   end
   
   private

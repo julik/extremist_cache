@@ -1,6 +1,15 @@
 require 'openssl'
 module ExtremistCache
   DIGEST = OpenSSL::Digest::MD4
+  VERSION = '0.0.1'
+  
+  # To be called from a plugin init.rb 
+  def self.bootstrap!
+    if !@boostrapped
+      ::ActionController::Base.send(:include, ExtremistCache)
+      ::ActionController::Base.send(:helper, ExtremistCache)
+    end
+  end
   
   # This one should be used from controllers and helpers
   def cached_based_on(*whatever)

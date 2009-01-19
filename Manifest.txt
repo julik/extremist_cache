@@ -1,0 +1,10 @@
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+init.rb
+lib/extremist_cache.rb
+lib/marking_store.rb
+lib/touching_store.rb
+test/digest_benchmark.rb
+test/test_extremist_cache.rb
